@@ -1,1 +1,1 @@
-# React-native-firstInit
+# React-native-practices
