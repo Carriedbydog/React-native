@@ -2,8 +2,9 @@ import { StatusBar } from "expo-status-bar";
 import { ImageBackground, SafeAreaView, StyleSheet, View } from "react-native";
 // import { useFonts } from "expo-font";
 import { Courses } from "./components/Courses";
+import { Registration } from "./components/Registration";
 const image = { uri: "https://legacy.reactjs.org/logo-og.png" };
-const localImage = require("./assets/cocktail.jpg");
+const localImage = require("./assets/bg.png");
 
 export default function App() {
   // const [fontsLoaded] = useFonts({
@@ -15,14 +16,17 @@ export default function App() {
   // }
 
   return (
-    <View style={styles.container}>
-      <ImageBackground source={image} resizeMode="cover" style={styles.image}>
-        {/* <SafeAreaView style={styles.container}> */}
-        <Courses />
+    <SafeAreaView style={styles.container}>
+      <ImageBackground
+        source={localImage}
+        resizeMode="cover"
+        style={styles.image}
+      >
+        <Registration />
+        {/* <Courses /> */}
         <StatusBar style="auto" />
-        {/* </SafeAreaView> */}
       </ImageBackground>
-    </View>
+    </SafeAreaView>
   );
 }
 
