@@ -1,49 +1,38 @@
-import { StatusBar } from "expo-status-bar";
-import { ImageBackground, SafeAreaView, StyleSheet, View } from "react-native";
-// import { useFonts } from "expo-font";
-import { Courses } from "./components/Courses";
-import { Registration } from "./components/Registration";
-const image = { uri: "https://legacy.reactjs.org/logo-og.png" };
-const localImage = require("./assets/bg.png");
+import * as Font from "expo-font";
+import { useState, useEffect } from "react";
+import * as SplashScreen from "expo-splash-screen";
+import MainStack from "./navigate";
 
 export default function App() {
-  // const [fontsLoaded] = useFonts({
-  //   "Inter-Black": require("./assets/fonts/Inter-Black.otf"),
-  // });
+  const [font, setFont] = useState(false);
 
-  // if (!fontsLoaded) {
-  //   return null;
-  // }
+  useEffect(() => {
+    const loadFonts = async () => {
+      try {
+        await SplashScreen.preventAutoHideAsync();
+        await Font.loadAsync({
+          "Poppins-Regular": require("./assets/fonts/Poppins-Regular.ttf"),
+          "Poppins-Bold": require("./assets/fonts/Poppins-Bold.ttf"),
+          "Poppins-Italic": require("./assets/fonts/Poppins-Italic.ttf"),
+        });
+        setFont(true);
+      } catch (e) {
+        console.warn(e);
+      }
+    };
 
-  return (
-    <SafeAreaView style={styles.container}>
-      <ImageBackground
-        source={localImage}
-        resizeMode="cover"
-        style={styles.image}
-      >
-        <Registration />
-        {/* <Courses /> */}
-        <StatusBar style="auto" />
-      </ImageBackground>
-    </SafeAreaView>
-  );
+    loadFonts();
+  }, []);
+
+  useEffect(() => {
+    if (font) {
+      SplashScreen.hideAsync().catch(console.warn);
+    }
+  }, [font]);
+
+  if (!font) {
+    return null;
+  }
+
+  return <MainStack />;
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  image: {
-    flex: 1,
-    justifyContent: "center",
-  },
-  text: {
-    color: "white",
-    fontSize: 42,
-    lineHeight: 84,
-    fontWeight: "bold",
-    textAlign: "center",
-    backgroundColor: "#000000c0",
-  },
-});
