@@ -7,9 +7,9 @@ export const globalStyles = StyleSheet.create({
     paddingTop: 60,
   },
   title: {
-    fontSize: 20,
+    fontSize: 25,
     color: "#333",
-    fontFamily: "Poppins-Bold",
+    // fontFamily: "Poppins-Bold",
     textAlign: "center",
   },
 });
