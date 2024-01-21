@@ -17,8 +17,6 @@ export default function FullInfo({ navigation, route }) {
       <Image
         style={styles.img}
         source={{
-          width: "100%",
-          height: 200,
           uri: route.params.img,
         }}
       />
@@ -35,6 +33,8 @@ const styles = StyleSheet.create({
   img: {
     marginBottom: 30,
     objectFit: "contain",
+    width: "100%",
+    height: 200,
   },
   title: {
     fontSize: 20,

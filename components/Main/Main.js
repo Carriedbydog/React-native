@@ -9,6 +9,7 @@ import {
 import { globalStyles } from "../../styles/style";
 import { useState } from "react";
 import { StatusBar } from "expo-status-bar";
+import { PlusCircle } from "lucide-react-native";
 
 export default function Main({ navigation }) {
   const [news, setNews] = useState([
@@ -37,6 +38,7 @@ export default function Main({ navigation }) {
 
   return (
     <View style={globalStyles.main}>
+      <PlusCircle />
       <Text style={[globalStyles.title, styles.header]}>Home</Text>
       <FlatList
         data={news}
@@ -48,8 +50,6 @@ export default function Main({ navigation }) {
             <Image
               style={styles.img}
               source={{
-                width: "100%",
-                height: 200,
                 uri: item.img,
               }}
             />
@@ -81,5 +81,7 @@ const styles = StyleSheet.create({
   img: {
     marginBottom: 20,
     objectFit: "contain",
+    width: "100%",
+    height: 200,
   },
 });
