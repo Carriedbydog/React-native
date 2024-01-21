@@ -1,9 +1,7 @@
 import MainStack from "./navigate";
 import { useFonts } from "expo-font";
-import * as SplashScreen from "expo-splash-screen";
 import AppLoading from "expo-app-loading";
-
-SplashScreen.preventAutoHideAsync();
+import { StyleSheet } from "react-native";
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -13,8 +11,10 @@ export default function App() {
   });
 
   if (!fontsLoaded) {
-    return <AppLoading />;
+    return null;
   }
 
   return <MainStack />;
 }
+
+const styles = StyleSheet.create({});
