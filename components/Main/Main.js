@@ -5,11 +5,12 @@ import {
   FlatList,
   TouchableOpacity,
   Image,
+  Modal,
 } from "react-native";
 import { globalStyles } from "../../styles/style";
 import { useState } from "react";
 import { StatusBar } from "expo-status-bar";
-import { PlusCircle } from "lucide-react-native";
+import { PlusSquare, XCircle } from "lucide-react-native";
 
 export default function Main({ navigation }) {
   const [news, setNews] = useState([
@@ -36,9 +37,29 @@ export default function Main({ navigation }) {
     },
   ]);
 
+  const [modalWindow, setModalWindow] = useState(false);
+
   return (
     <View style={globalStyles.main}>
-      <PlusCircle />
+      <Modal visible={modalWindow}>
+        <View style={globalStyles.main}>
+          <XCircle
+            color={"black"}
+            style={styles.closeIcon}
+            size={30}
+            onPress={() => setModalWindow(false)}
+          />
+          <Text style={styles.title}>Modal</Text>
+        </View>
+      </Modal>
+      <View style={styles.iconWrapper}>
+        <PlusSquare
+          style={styles.addIcon}
+          color={"green"}
+          size={30}
+          onPress={() => setModalWindow(true)}
+        />
+      </View>
       <Text style={[globalStyles.title, styles.header]}>Home</Text>
       <FlatList
         data={news}
@@ -63,6 +84,18 @@ export default function Main({ navigation }) {
 }
 
 const styles = StyleSheet.create({
+  iconWrapper: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginBottom: 25,
+  },
+  closeIcon: {
+    position: "absolute",
+    top: 90,
+    right: 30,
+    marginTop: 20,
+  },
   header: {
     marginBottom: 30,
   },
