@@ -11,6 +11,7 @@ import { globalStyles } from "../../styles/style";
 import { useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { PlusSquare, XCircle } from "lucide-react-native";
+import Form from "../Form/Form";
 
 export default function Main({ navigation }) {
   const [news, setNews] = useState([
@@ -39,6 +40,14 @@ export default function Main({ navigation }) {
 
   const [modalWindow, setModalWindow] = useState(false);
 
+  const handleAddArticle = (article) => {
+    article.key = Math.random().toString();
+    setNews((list) => {
+      return [article, ...list];
+    });
+    setModalWindow(false);
+  };
+
   return (
     <View style={globalStyles.main}>
       <Modal visible={modalWindow}>
@@ -50,6 +59,7 @@ export default function Main({ navigation }) {
             onPress={() => setModalWindow(false)}
           />
           <Text style={styles.title}>Modal</Text>
+          <Form handleAddArticle={handleAddArticle} />
         </View>
       </Modal>
       <View style={styles.iconWrapper}>
@@ -92,7 +102,7 @@ const styles = StyleSheet.create({
   },
   closeIcon: {
     position: "absolute",
-    top: 90,
+    top: 40,
     right: 30,
     marginTop: 20,
   },
